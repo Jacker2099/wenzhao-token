@@ -98,6 +98,12 @@
             word-break: break-word;
         }
 
+        #contractAddress {
+            cursor: pointer;
+            color: #3C3CF0;
+            transition: color 0.3s ease;
+        }
+
         .wallet-tip {
             margin-top: 40px;
             font-size: 14px;
@@ -132,7 +138,7 @@
 
         <div class="contract">
             <p><strong>Contract Address:</strong></p>
-            <p>3QasrL8fDs8ca1zkw9Lj1aVBVCiBvchPM9ywza7imoon</p>
+            <p id="contractAddress" onclick="copyAddress()">3QasrL8fDs8ca1zkw9Lj1aVBVCiBvchPM9ywza7imoon</p>
         </div>
 
         <p class="wallet-tip" onclick="copyAddress()" id="copyTip">
@@ -145,9 +151,14 @@
         const address = "3QasrL8fDs8ca1zkw9Lj1aVBVCiBvchPM9ywza7imoon";
         navigator.clipboard.writeText(address).then(function () {
             const tip = document.getElementById("copyTip");
+            const contract = document.getElementById("contractAddress");
+
             tip.textContent = "✅ 合约地址已复制！";
+            contract.style.color = "#2E8B57"; // success green
+
             setTimeout(() => {
                 tip.textContent = "🔍 其他钱包或交易所请复制合约地址，搜索代币后购买！（点击复制合约）";
+                contract.style.color = "#3C3CF0"; // restore blue
             }, 3000);
         });
     }
