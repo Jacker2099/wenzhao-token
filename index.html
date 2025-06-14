@@ -56,14 +56,8 @@
         }
 
         @keyframes fadeUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         @keyframes glow {
@@ -73,6 +67,11 @@
             50% {
                 box-shadow: 0 0 20px 6px rgba(60, 60, 240, 0.9);
             }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .buy-button {
@@ -98,6 +97,20 @@
             color: #777;
             word-break: break-word;
         }
+
+        .wallet-tip {
+            margin-top: 40px;
+            font-size: 14px;
+            color: #555;
+            cursor: pointer;
+            animation: fadeIn 1.2s ease forwards;
+            transition: color 0.2s ease;
+        }
+
+        .wallet-tip:hover {
+            color: #222;
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
@@ -115,13 +128,29 @@
         <div class="button-group">
             <a class="buy-button" href="https://moon.it/tokens/3QasrL8fDs8ca1zkw9Lj1aVBVCiBvchPM9ywza7imoon" target="_blank">🚀 Buy $WENZHAO on Moonshot</a>
             <a class="buy-button" href="https://web3.okx.com/ul/H4w9uAL" target="_blank">🚀 Buy $WENZHAO on OKX Wallet</a>
-            <a class="buy-button" href="https://phantom.app" target="_blank">🚀 Buy $WENZHAO on Phantom Wallet</a>
         </div>
 
         <div class="contract">
             <p><strong>Contract Address:</strong></p>
             <p>3QasrL8fDs8ca1zkw9Lj1aVBVCiBvchPM9ywza7imoon</p>
         </div>
+
+        <p class="wallet-tip" onclick="copyAddress()" id="copyTip">
+            🔍 其他钱包或交易所请复制合约地址，搜索代币后购买！（点击复制合约）
+        </p>
     </div>
+
+    <script>
+    function copyAddress() {
+        const address = "3QasrL8fDs8ca1zkw9Lj1aVBVCiBvchPM9ywza7imoon";
+        navigator.clipboard.writeText(address).then(function () {
+            const tip = document.getElementById("copyTip");
+            tip.textContent = "✅ 合约地址已复制！";
+            setTimeout(() => {
+                tip.textContent = "🔍 其他钱包或交易所请复制合约地址，搜索代币后购买！（点击复制合约）";
+            }, 3000);
+        });
+    }
+    </script>
 </body>
 </html>
